@@ -1,0 +1,99 @@
+/* Schriften lokal in fonts/ ablegen: Newsreader.woff2, IBMPlexMono-Regular.woff2 */
+@font-face{font-family:"Newsreader";src:url("fonts/Newsreader.woff2") format("woff2");font-weight:200 800;font-display:swap}
+
+
+:root{
+  --bg:#070806; --paper:#f1eee5; --accent:#2d8a6f; --emerald:#0b4f3d;
+  --line:rgba(241,238,229,.16);
+  --f-serif:"Newsreader","Iowan Old Style",Georgia,serif;
+  --f-sans:"Helvetica Neue",Arial,sans-serif;
+  --ease:cubic-bezier(.77,0,.18,1);
+  --pad:clamp(1.25rem,5vw,4rem);
+}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{display:flex;flex-direction:column;min-height:100svh;margin:0;background:var(--bg);color:#fff;font:1.05rem/1.65 var(--f-serif)}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+
+/* Header: Start links, übrige Navigation rechts. */
+header{position:absolute;inset:0 0 auto 0;z-index:5;padding:1.55rem var(--pad) 0;color:var(--paper)}
+header::after{content:"";position:absolute;left:var(--pad);right:var(--pad);bottom:0;height:1px;background:var(--line)}
+header nav{position:relative;display:flex;align-items:flex-end;justify-content:space-between;width:100%;font:500 .78rem/1 var(--f-sans)}
+header nav a{position:relative;padding-bottom:1.05rem;text-decoration:none;color:rgba(241,238,229,.72);transition:color .3s}
+header nav a:hover,header nav a[aria-current="page"]{color:var(--paper)}
+.start-link{display:inline-flex;align-items:center;justify-content:center;width:1.6rem;height:1.6rem;margin-bottom:1.05rem;padding:0!important;color:var(--paper)!important}
+.home-icon{width:1.3rem;height:1.3rem;fill:none;stroke:currentColor;stroke-width:1.35;stroke-linecap:round;stroke-linejoin:round;transition:transform .35s var(--ease),color .3s}
+.start-link:hover .home-icon{transform:translateY(-1px)}
+.nav-right{display:flex;gap:clamp(1.4rem,4vw,3.5rem)}
+.handle{position:absolute;left:0;bottom:-6px;width:12px;height:12px;border:1.5px solid var(--accent);border-radius:50%;background:var(--bg);pointer-events:none;transition:transform .9s var(--ease)}
+
+/* Seiten */
+main{position:relative;flex:1;display:grid;overflow:clip;--t:.9s}
+.view{position:relative;z-index:1;grid-area:1/1;padding:9.2rem var(--pad) 3rem}
+.copy{max-width:36rem}
+.label{margin:0 0 2rem;font:400 .95rem/1.2 var(--f-serif);font-style:italic;color:rgba(241,238,229,.68)}
+h1{margin:0 0 2rem;font:400 clamp(1.9rem,4.4vw,3.6rem)/1.14 var(--f-serif);letter-spacing:-.01em}
+h1:focus{outline:none}
+.view p{margin:0 0 1.2rem;color:rgba(255,255,255,.8)}
+.year{position:absolute;right:var(--pad);bottom:2rem;display:flex;align-items:center;gap:.8rem;font:.8rem var(--f-serif);font-style:italic;color:rgba(241,238,229,.68)}
+.year i{width:7rem;height:1px;background:rgba(255,255,255,.4)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:2rem}
+.cols h2{margin:0 0 .6rem;font:400 1.15rem var(--f-serif)}
+
+/* Kontakt: Mail und Telefon als ruhige, grosse Links statt Formular */
+.contact-links{display:flex;flex-direction:column;gap:1.5rem;margin-top:.5rem}
+.contact-link{display:inline-flex;flex-direction:column;gap:.4rem;width:fit-content;color:var(--paper);text-decoration:none;font:400 clamp(1.5rem,3.6vw,2.4rem)/1.15 var(--f-serif);border-bottom:1px solid transparent;transition:color .3s,border-color .3s}
+.contact-link:hover{color:var(--accent);border-color:var(--accent)}
+.contact-label{font:500 .68rem/1 var(--f-sans);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+
+/* Hero: großes, elegantes Hauptelement statt Entwickler-Headline. */
+.hero-note{max-width:34rem;margin:2.7rem 0 0}
+.hero-note p{font-size:clamp(1.05rem,1.35vw,1.2rem);line-height:1.55;color:rgba(241,238,229,.76);margin:0}
+.hero-meta{margin:0}
+.hero-meta p{margin:0;color:rgba(241,238,229,.48);font-size:.9rem;letter-spacing:.02em}
+.hero-cta{margin:0 0 0}
+.hero-button{display:inline-flex;align-items:center;gap:clamp(1.5rem,4vw,3.5rem);padding:1.05rem 0 2.35rem;color:var(--paper);text-decoration:none;border-bottom:1px solid var(--accent);font:400 clamp(2.25rem,5.2vw,5rem)/.95 var(--f-serif);transition:color .35s,transform .45s var(--ease),border-color .35s}
+.hero-button b{color:var(--accent);font:400 .75em/1 var(--f-serif);transition:transform .4s}
+.hero-button:hover{color:#fff;transform:translateX(.35rem)}
+.hero-button:hover b{transform:translate(5px,-5px)}
+
+/* Smaragd-Textur: ein Element, das zwischen den Seiten mitwandert */
+.tex{position:absolute;z-index:0;top:0;right:0;bottom:0;width:58%;overflow:hidden;background:#03100c;transition:width var(--t) var(--ease),top var(--t) var(--ease),right var(--t) var(--ease),bottom var(--t) var(--ease),opacity var(--t) var(--ease),border-radius var(--t)}
+.tex::before{content:"";position:absolute;inset:-12%;translate:calc(var(--mx,0)*26px) calc(var(--my,0)*26px);animation:drift 40s ease-in-out infinite alternate;
+  background:
+    linear-gradient(118deg,transparent 28%,rgba(20,130,96,.38) 45%,rgba(4,44,32,.8) 53%,transparent 70%),
+    repeating-linear-gradient(118deg,transparent 0 11px,rgba(0,0,0,.3) 11px 12px,rgba(40,210,160,.035) 12px 26px),
+    radial-gradient(60% 50% at 70% 62%,rgba(20,150,110,.22),transparent 70%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 .1 0 0 0 0 .8 0 0 0 0 .6 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.tex::after{content:"";position:absolute;inset:0;background:linear-gradient(to right,var(--bg),transparent 60%);opacity:1;transition:opacity var(--t) var(--ease)}
+@keyframes drift{to{transform:translate(-4%,3%) scale(1.06)}}
+main[data-view=ueber-mich] .tex{top:8rem;right:var(--pad);bottom:2.5rem;width:min(17rem,26%);border-radius:3px}
+main[data-view=ueber-mich] .tex::after{opacity:0}
+main[data-view=kontakt] .tex{width:42%;opacity:.3}
+main[data-view=impressum] .tex{width:0;opacity:0}
+
+/* Seitenwechsel: ruhige, fließende Seitenanimation ohne sichtbaren Schieber */
+.edge{display:none!important}
+
+/* Footer */
+footer{display:flex;justify-content:space-between;gap:1rem;margin:0 var(--pad);padding:1.25rem 0;border-top:1px solid var(--line);font:.86rem var(--f-serif);color:rgba(241,238,229,.68)}
+.footer-links{display:flex;gap:1.5rem}
+footer a{text-decoration:none}
+footer a:hover,footer a[aria-current]{color:var(--accent)}
+
+/* Text steigt von unten auf */
+.line{display:block;overflow:hidden;padding:.05em 6px .2em;margin:-.05em -6px -.2em}
+.line>span{display:block;transform:translateY(115%)}
+.view.in .line>span{transform:none;transition:transform .9s cubic-bezier(.2,.7,.1,1) calc(var(--i,0)*90ms)}
+.label.line{padding-bottom:.3em}
+
+@media (max-width:800px){
+  main[data-view=ueber-mich] .tex{width:30%;top:auto;height:12rem}
+  .year{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .line>span{transform:none!important;transition:none!important}
+  .tex,.tex::before{transition:none;animation:none}
+}
+.view .label{margin:2.5rem 0 0}
