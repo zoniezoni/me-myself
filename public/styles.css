@@ -36,6 +36,7 @@ main{position:relative;flex:1;display:grid;overflow:clip;--t:.9s}
 h1{margin:0 0 2rem;font:400 clamp(1.9rem,4.4vw,3.6rem)/1.14 var(--f-serif);letter-spacing:-.01em}
 h1:focus{outline:none}
 .view p{margin:0 0 1.2rem;color:rgba(255,255,255,.8)}
+.view p .aside{display:block;margin-left:1.5rem;font-style:italic;color:rgba(241,238,229,.58)}
 .year{position:absolute;right:var(--pad);bottom:2rem;display:flex;align-items:center;gap:.8rem;font:.8rem var(--f-serif);font-style:italic;color:rgba(241,238,229,.68)}
 .year i{width:7rem;height:1px;background:rgba(255,255,255,.4)}
 .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:2rem}
@@ -79,8 +80,9 @@ main[data-view=impressum] .tex{width:0;opacity:0}
 /* Footer */
 footer{display:flex;justify-content:space-between;gap:1rem;margin:0 var(--pad);padding:1.25rem 0;border-top:1px solid var(--line);font:.86rem var(--f-serif);color:rgba(241,238,229,.68)}
 .footer-links{display:flex;gap:1.5rem}
-footer a{text-decoration:none}
-footer a:hover,footer a[aria-current]{color:var(--accent)}
+footer a{color:rgba(241,238,229,.82);text-decoration:underline;text-decoration-color:rgba(241,238,229,.32);text-underline-offset:3px;text-decoration-thickness:1px}
+footer a:hover,footer a[aria-current]{color:var(--accent);text-decoration-color:var(--accent)}
+footer>span:last-child{font-style:italic;color:rgba(241,238,229,.42)}
 
 /* Text steigt von unten auf */
 .line{display:block;overflow:hidden;padding:.05em 6px .2em;margin:-.05em -6px -.2em}
@@ -89,7 +91,8 @@ footer a:hover,footer a[aria-current]{color:var(--accent)}
 .label.line{padding-bottom:.3em}
 
 @media (max-width:800px){
-  main[data-view=ueber-mich] .tex{width:30%;top:auto;height:12rem}
+  main[data-view=ueber-mich] .tex{top:auto;right:0;bottom:0;left:0;width:100%;height:4rem;border-radius:0}
+  #ueber-mich{padding-bottom:6rem}
   .year{display:none}
 }
 @media (prefers-reduced-motion:reduce){
