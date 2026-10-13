@@ -125,6 +125,17 @@ if (!reduceMotion.matches) {
   });
 }
 
+// Karten: Klick auf den Pfeil hält den gedrehten Zustand zusätzlich zum Hover
+document.querySelectorAll<HTMLButtonElement>('.card-arrow').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const card = btn.closest('.card') as HTMLElement;
+    const flipped = card.classList.toggle('is-flipped');
+    card
+      .querySelectorAll<HTMLButtonElement>('.card-arrow')
+      .forEach((b) => b.setAttribute('aria-pressed', String(flipped)));
+  });
+});
+
 window.addEventListener('hashchange', sync);
 window.addEventListener('resize', () => { if (current >= 0) placeHandle(current, false); });
 void document.fonts.ready.then(sync);

@@ -49,18 +49,38 @@ h1:focus{outline:none}
 .contact-label{font:500 .68rem/1 var(--f-sans);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
 
 /* Hero: großes, elegantes Hauptelement statt Entwickler-Headline. */
-.hero-note{max-width:34rem;margin:2.7rem 0 0}
-.hero-note p{font-size:clamp(1.05rem,1.35vw,1.2rem);line-height:1.55;color:rgba(241,238,229,.76);margin:0}
-.hero-meta{margin:0}
-.hero-meta p{margin:0;color:rgba(241,238,229,.48);font-size:.9rem;letter-spacing:.02em}
+.hero-label{margin:0 0 1.4rem;font:400 .95rem/1.2 var(--f-serif);font-style:italic;color:var(--accent)}
 .hero-cta{margin:0 0 0}
-.hero-button{display:inline-flex;align-items:center;gap:clamp(1.5rem,4vw,3.5rem);padding:1.05rem 0 2.35rem;color:var(--paper);text-decoration:none;border-bottom:1px solid var(--accent);font:400 clamp(2.25rem,5.2vw,5rem)/.95 var(--f-serif);transition:color .35s,transform .45s var(--ease),border-color .35s}
+.hero-button{display:inline-flex;align-items:center;gap:clamp(1.5rem,4vw,3.5rem);padding:1.05rem 0 .5rem;color:var(--paper);text-decoration:none;font:400 clamp(2.25rem,5.2vw,5rem)/.95 var(--f-serif);transition:color .35s,transform .45s var(--ease)}
 .hero-button b{color:var(--accent);font:400 .75em/1 var(--f-serif);transition:transform .4s}
 .hero-button:hover{color:#fff;transform:translateX(.35rem)}
 .hero-button:hover b{transform:translate(5px,-5px)}
 
+/* Trennlinie zwischen Hero-Button und Karten, wächst beim Einblenden von links nach rechts */
+.hero-divider{height:1px;max-width:min(100%,46rem);margin:2.5rem 0;background:var(--accent);opacity:.65;transform-origin:left;transform:scaleX(0);transition:transform 1s cubic-bezier(.2,.7,.1,1) .2s}
+.view.in .hero-divider{transform:scaleX(1)}
+
+/* Drei Karten: Vorderseite Titel, Rückseite dreht sich über den Pfeil */
+.hero-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.1rem;max-width:50rem;opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease) .45s,transform .8s var(--ease) .45s}
+.view.in .hero-cards{opacity:1;transform:none}
+.card{height:11.75rem;perspective:1500px}
+.card-inner{position:relative;width:100%;height:100%;transition:transform .7s var(--ease);transform-style:preserve-3d}
+.card.is-flipped .card-inner,.card:has(.card-arrow:hover) .card-inner{transform:rotateY(180deg)}
+.card-face{position:absolute;inset:0;display:flex;align-items:flex-end;padding:1.1rem 1.15rem;border:1.5px solid rgba(241,238,229,.3);border-radius:4px;background:var(--bg);backface-visibility:hidden}
+.card-back{transform:rotateY(180deg)}
+.card-title{display:block;max-width:85%;font:400 1.02rem/1.28 var(--f-serif);color:var(--accent)}
+.card-back-body{display:flex;flex-direction:column;gap:.55rem;max-width:88%}
+.card-kicker{display:block;font:500 .66rem/1 var(--f-sans);letter-spacing:.09em;text-transform:uppercase;color:var(--accent)}
+.card-text{display:block;font:400 .88rem/1.42 var(--f-serif);color:rgba(241,238,229,.78)}
+.card-arrow{position:absolute;top:.65rem;right:.65rem;width:1.55rem;height:1.55rem;display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(241,238,229,.3);border-radius:50%;background:transparent;color:var(--accent);font-size:.88rem;line-height:1;padding:0;cursor:pointer;transition:transform .55s var(--ease),border-color .3s,color .3s}
+.card-arrow:hover{border-color:var(--accent);color:#fff}
+.card.is-flipped .card-arrow,.card:has(.card-arrow:hover) .card-arrow{transform:rotate(180deg)}
+@media (max-width:800px){
+  .hero-cards{grid-template-columns:1fr;max-width:22rem}
+}
+
 /* Smaragd-Textur: ein Element, das zwischen den Seiten mitwandert */
-.tex{position:absolute;z-index:0;top:0;right:0;bottom:0;width:58%;overflow:hidden;background:#03100c;transition:width var(--t) var(--ease),top var(--t) var(--ease),right var(--t) var(--ease),bottom var(--t) var(--ease),opacity var(--t) var(--ease),border-radius var(--t)}
+.tex{position:absolute;z-index:0;top:0;right:0;bottom:0;width:36%;overflow:hidden;background:#03100c;transition:width var(--t) var(--ease),top var(--t) var(--ease),right var(--t) var(--ease),bottom var(--t) var(--ease),opacity var(--t) var(--ease),border-radius var(--t)}
 .tex::before{content:"";position:absolute;inset:-12%;translate:calc(var(--mx,0)*26px) calc(var(--my,0)*26px);animation:drift 40s ease-in-out infinite alternate;
   background:
     linear-gradient(118deg,transparent 28%,rgba(20,130,96,.38) 45%,rgba(4,44,32,.8) 53%,transparent 70%),
@@ -98,5 +118,8 @@ footer>span:last-child{font-style:italic;color:rgba(241,238,229,.42)}
 @media (prefers-reduced-motion:reduce){
   .line>span{transform:none!important;transition:none!important}
   .tex,.tex::before{transition:none;animation:none}
+  .hero-divider{transition:none;transform:scaleX(1)}
+  .card-inner,.card-arrow{transition:none}
+  .hero-cards{transition:none;opacity:1;transform:none}
 }
 .view .label{margin:2.5rem 0 0}
